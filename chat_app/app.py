@@ -12,6 +12,7 @@ from fuzzywuzzy import process
 from io import StringIO
 import requests
 from dotenv import load_dotenv
+# from config import url
 
 # Load environment variables
 load_dotenv()
@@ -24,10 +25,13 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY')
 sec_key = os.getenv('HUGGINGFACEHUB_API_TOKEN')
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = sec_key
 
-# Google Sheet details
-file_id = '1Dt1Zud6fLTiNRx-_r7EaPiHAhQDcfcK5M9xxhX0x--Q'  # Replace with your actual file ID
-sheet_gid = '1023326500'  # Replace with your actual sheet GID
-url = f'https://docs.google.com/spreadsheets/d/{file_id}/export?format=csv&id={file_id}&gid={sheet_gid}'
+GOOGLE_SHEET_ID = os.getenv('GOOGLE_SHEET_ID')
+# os.environ['GOOGLE_SHEET_ID'] = GOOGLE_SHEET_ID
+GOOGLE_SHEET_GID = os.getenv('GOOGLE_SHEET_GID')
+# os.environ['GOOGLE_SHEET_GID'] = GOOGLE_SHEET_GID
+
+url = f'https://docs.google.com/spreadsheets/d/{GOOGLE_SHEET_ID}/export?format=csv&id={GOOGLE_SHEET_ID}&gid={GOOGLE_SHEET_GID}'
+
 
 documents = []
 vectorstore = None
